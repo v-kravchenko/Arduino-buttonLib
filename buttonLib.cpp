@@ -5,8 +5,6 @@ buttonLib::buttonLib(int pin, callbackFunction clickFunction) {
     this->clickFunc = clickFunction;
     this->buttonPressed = -1;
     this->buttonCount = 3;
-    this->millisRepeat = 0;
-    this->repeatMode = 0;
     this->repeat1 = 0;
     this->repeat2 = 0;
 }
@@ -19,6 +17,8 @@ void buttonLib::setRepeat(unsigned int repeat1, unsigned int repeat2) {
 void buttonLib::update() {
     
     unsigned long currentMillis = millis();
+    static unsigned long millisRepeat = 0;
+    static bool repeatMode = 0;
 
     if (buttonPressed == -1) {
         for (byte i = 0; i < buttonCount; i++ ) {
@@ -49,8 +49,8 @@ bool buttonLib::readButton(byte buttonNum) {
     int sensorValue = analogRead(buttonPin);
 
     if (buttonNum == 0 && sensorValue > 767)  return true;
-    else if (buttonNum == 2 && sensorValue >= 374 && sensorValue <= 767)  return true;
-    else if (buttonNum == 1 && sensorValue > 187 && sensorValue < 374)  return true;
+    else if (buttonNum == 1 && sensorValue >= 374 && sensorValue <= 767)  return true;
+    else if (buttonNum == 2 && sensorValue > 187 && sensorValue < 374)  return true;
     else return false;
 }
 
