@@ -20,11 +20,9 @@ private:
     int buttonPin;
     int buttonPressed;
     byte buttonCount;
-    unsigned long millisRepeat;
 
     unsigned int repeat1;
-    unsigned int repeat2;
-    byte repeatMode;     
+    unsigned int repeat2; 
 
     callbackFunction clickFunc;  
 };
