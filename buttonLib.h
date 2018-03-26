@@ -3,27 +3,24 @@
 
 #include "Arduino.h"
 
+#define BUTTON_COUNT 6
+#define BUTTON_DEBUG false
+
 extern "C" {
-    typedef void (*callbackFunction)(byte);
+    typedef void (*callbackFunction)(uint8_t);
 }
 
 class buttonLib 
 {
 public:
-    buttonLib(int pin, callbackFunction clickFunction);
+    buttonLib(uint8_t pin, callbackFunction clickFunction);
     void update();
-    void setRepeat(unsigned int repeat1, unsigned int repeat2);
 private:
-    bool readButton(byte buttonNum);
-    bool debounce(bool last, byte buttonNum);
+    bool readButton(uint8_t buttonNum);
+    bool debounce(bool last, uint8_t buttonNum);
 
-    int buttonPin;
-    int buttonPressed;
-    byte buttonCount;
-
-    unsigned int repeat1;
-    unsigned int repeat2; 
-
+    uint8_t buttonPin;
+    char buttonPressed;
     callbackFunction clickFunc;  
 };
 
